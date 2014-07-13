@@ -16,7 +16,8 @@ module.exports = function (grunt) {
             "simple": ["test/simple.js"],
             "compound": ["test/compound.js"],
             "complex": ["test/complex.js"],
-            "parse-str": ["test/parse-str.js"]
+            "parse-str": ["test/parse-str.js"],
+            "list": ["test/list.js"]
         },
         "jshint": {
             "options": {
