@@ -1,6 +1,6 @@
 "use strict";
 
-var SimpleSelector = require("../lib/json-select.js").SimpleSelector;
+var SimpleSelector = require("../lib/object-select.js").SimpleSelector;
 
 /*
     ======== A Handy Little Nodeunit Reference ========

@@ -1,24 +1,24 @@
 {
-  "name": "json-select",
+  "name": "object-select",
   "version": "0.0.0",
-  "main": "lib/json-select.js",
+  "main": "lib/object-select.js",
   "description": "The best module ever.",
-  "homepage": "https://github.com/ileri/json-select",
-  "bugs": "https://github.com/ileri/json-select/issues",
+  "homepage": "https://github.com/ileri/object-select",
+  "bugs": "https://github.com/ileri/object-select/issues",
   "author": {
     "name": "Malte-Maurice Dreyer",
     "email": "dreyer.maltem@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ileri/json-select"
+    "url": "https://github.com/ileri/object-select"
   },
   "license": "MIT",
   "files": [
     "lib"
   ],
   "keywords": [
-    "json-select",
+    "object-select",
     "json",
     "select",
     "selector",
@@ -38,6 +38,6 @@
   },
   "scripts": {
     "test": "grunt",
-    "browser": "browserify lib/json-select.js > browser.js"
+    "browser": "browserify lib/object-select.js > browser.js"
   }
 }

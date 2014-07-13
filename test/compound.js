@@ -1,6 +1,6 @@
 "use strict";
 
-var CompoundSelector = require("../lib/json-select.js").CompoundSelector;
+var CompoundSelector = require("../lib/object-select.js").CompoundSelector;
 
 exports.simpleSelector = {
     "test": function(test) {
