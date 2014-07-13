@@ -12,12 +12,12 @@ exports.simpleSelector = {
             },
             selector;
 
-        selector = new ComplexSelector("#example :matches(:first-child, :last-child)"); // create selector
+        selector = new ComplexSelector(".example :matches(:first-child, :last-child)"); // create selector
         test.deepEqual(selector.find({
             "example": ["this is the first child", "some other child", "this is the last child"]
         }), ["this is the first child", "this is the last child"]);
 
-        selector = new ComplexSelector("#test :matches(#test2, #test3)");
+        selector = new ComplexSelector(".test :matches(.test2, .test3)");
         test.deepEqual(selector.find({
             "test": {
                 "test2": "abc",
