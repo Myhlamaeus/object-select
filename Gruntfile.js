@@ -12,7 +12,6 @@ module.exports = function (grunt) {
             "lib": "lib"
         },
         "nodeunit": {
-            "files": ["test/**/*.js"],
             "simple": ["test/simple.js"],
             "compound": ["test/compound.js"],
             "complex": ["test/complex.js"],
