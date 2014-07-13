@@ -10,7 +10,7 @@ Note: this requires the --harmony_collections flag
 
 ```js
 var objectSelect = require('./lib/object-select'),
-    selector = new objectSelect.ComplexSelector("#example :matches(:first-child, :last-child)"); // create selector
+    selector = new objectSelect.ComplexSelector(".example :matches(:first-child, :last-child)"); // create selector
 
 console.log(selector.find({
     "example": ["this is the first child", "some other child", "this is the last child"]
