@@ -5,8 +5,14 @@ var CompoundSelector = require("../lib/selectors/compound.js");
 exports.simpleSelector = {
     "test": function(test) {
         test.doesNotThrow(function() {
-            var selector = new CompoundSelector("string:matches(#test, #test2)");
+            var selector = new CompoundSelector(":not(:matches(#test, #test2))");
+            test.deepEqual(selector.find({
+                "test": "abc",
+                "test2": "abcd",
+                "test3": "def"
+            }), ["def"]);
 
+            selector = new CompoundSelector("string:matches(#test, #test2)");
             test.deepEqual(selector.find({
                 "test": "abc",
                 "test2": "abcd",

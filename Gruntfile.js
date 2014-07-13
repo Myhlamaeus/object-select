@@ -13,7 +13,10 @@ module.exports = function (grunt) {
         },
         "nodeunit": {
             "files": ["test/**/*.js"],
-            "compound": ["test/compound.js"]
+            "simple": ["test/simple.js"],
+            "compound": ["test/compound.js"],
+            "complex": ["test/complex.js"],
+            "parse-str": ["test/parse-str.js"]
         },
         "jshint": {
             "options": {
