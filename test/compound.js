@@ -3,7 +3,7 @@
 var CompoundSelector = require("../lib/object-select.js").CompoundSelector;
 
 exports.simpleSelector = {
-    "test": function(test) {
+    /*"test": function(test) {
         var selector;
 
         selector = new CompoundSelector(":not(:matches(.test, .test2))");
@@ -33,5 +33,12 @@ exports.simpleSelector = {
         }));
 
         test.done();
+    },*/
+    "pseudoElementCalc": function(test) {
+        var selector = new CompoundSelector(".abc::calc(n*10):val(120)");
+
+        test.ok(selector.matches(12, {
+            "abc": 12
+        }));
     }
 };
