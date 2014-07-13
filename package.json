@@ -1,6 +1,6 @@
 {
   "name": "object-select",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha",
   "main": "lib/object-select.js",
   "description": "The best module ever.",
   "homepage": "https://github.com/ileri/object-select",
