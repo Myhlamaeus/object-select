@@ -92,10 +92,9 @@ exports.simpleSelector = {
             "result": false
         };
 
-        test.ok(!selector.matches(parent.i, parent));
-        test.ok(!selector.matches(parent[0], parent));
-        test.ok(!selector.matches(parent[1], parent));
-        test.ok(!selector.matches(parent.result, parent));
+        test.throws(function() {
+            test.ok(!selector.matches(parent.i, parent));
+        });
 
         test.done();
     },
@@ -116,10 +115,9 @@ exports.simpleSelector = {
             "result": false
         };
 
-        test.ok(!selector.matches(parent.i, parent));
-        test.ok(!selector.matches(parent[0], parent));
-        test.ok(!selector.matches(parent[1], parent));
-        test.ok(!selector.matches(parent.result, parent));
+        test.throws(function() {
+            test.ok(!selector.matches(parent.i, parent));
+        });
 
         test.done();
     },
