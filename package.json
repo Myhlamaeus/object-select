@@ -5,10 +5,17 @@
   "description": "A selector engine for JavaScript Objects.",
   "homepage": "https://github.com/ileri/object-select",
   "bugs": "https://github.com/ileri/object-select/issues",
-  "author": {
+  "author": [{
     "name": "Malte-Maurice Dreyer",
     "email": "dreyer.maltem@gmail.com"
-  },
+  }],
+  "contributors": [{
+    "name": "Malte Dreyer",
+    "email": "dreyer.maltem@gmail.com",
+    "url": "https://github.com/ileri",
+    "contributions": 21,
+    "hireable": false
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/ileri/object-select"
@@ -18,15 +25,15 @@
     "lib"
   ],
   "keywords": [
-    "object-select",
-    "json",
-    "select",
-    "selector",
-    "json select",
-    "json selector",
     "filter",
-    "filter json"
+    "json",
+    "jsonselect",
+    "object",
+    "object-select",
+    "select",
+    "selector"
   ],
+  "dependencies": {},
   "devDependencies": {
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "^0.3.3",
