@@ -1,37 +1,37 @@
 "use strict";
 
-var CompoundSelector = require("../lib/selectors/compound.js");
+var CompoundSelector = require("../lib/json-select.js").CompoundSelector;
 
 exports.simpleSelector = {
     "test": function(test) {
-        test.doesNotThrow(function() {
-            var selector = new CompoundSelector(":not(:matches(#test, #test2))");
-            test.deepEqual(selector.find({
-                "test": "abc",
-                "test2": "abcd",
-                "test3": "def"
-            }), ["def"]);
+        var selector;
 
-            selector = new CompoundSelector("string:matches(#test, #test2)");
-            test.deepEqual(selector.find({
-                "test": "abc",
-                "test2": "abcd",
-                "test3": "def"
-            }), ["abc", "abcd"]);
+        selector = new CompoundSelector(":not(:matches(#test, #test2))");
+        test.deepEqual(selector.find({
+            "test": "abc",
+            "test2": "abcd",
+            "test3": "def"
+        }), ["def"]);
 
-            selector = new CompoundSelector("string:not(#test, #test2)");
-            test.deepEqual(selector.find({
-                "test": "abc",
-                "test2": "abcd",
-                "test3": "def"
-            }), ["def"]);
+        selector = new CompoundSelector("string:matches(#test, #test2)");
+        test.deepEqual(selector.find({
+            "test": "abc",
+            "test2": "abcd",
+            "test3": "def"
+        }), ["abc", "abcd"]);
 
-            selector = new CompoundSelector(":has(#test)");
-            test.ok(selector.matches({
-                "test": "whatever"
-            }));
+        selector = new CompoundSelector("string:not(#test, #test2)");
+        test.deepEqual(selector.find({
+            "test": "abc",
+            "test2": "abcd",
+            "test3": "def"
+        }), ["def"]);
 
-            test.done();
-        });
+        selector = new CompoundSelector(":has(#test)");
+        test.ok(selector.matches({
+            "test": "whatever"
+        }));
+
+        test.done();
     }
 };

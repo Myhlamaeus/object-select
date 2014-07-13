@@ -1,6 +1,6 @@
 "use strict";
 
-var ComplexSelector = require("../lib/selectors/complex.js");
+var ComplexSelector = require("../lib/json-select.js").ComplexSelector;
 
 exports.simpleSelector = {
     "test": function(test) {

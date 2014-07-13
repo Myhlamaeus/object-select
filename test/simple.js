@@ -1,6 +1,6 @@
 "use strict";
 
-var SimpleSelector = require("../lib/selectors/simple.js");
+var SimpleSelector = require("../lib/json-select.js").SimpleSelector;
 
 /*
     ======== A Handy Little Nodeunit Reference ========
@@ -54,159 +54,145 @@ var typeTests = {
 
 exports.simpleSelector = {
     "pseudoClassRoot": function(test) {
-        var selector = new SimpleSelector(":root");
+        var selector = new SimpleSelector(":root"),
+            parent = false;
 
-        test.doesNotThrow(function() {
-            var parent = false;
+        test.ok(selector.matches({
+            "test": "whatever"
+        }, parent));
 
-            test.ok(selector.matches({
+        parent = [{
+            "test": "whatever"
+        }];
+        test.ok(!selector.matches(parent[0], parent));
+
+        parent = {
+            "notRoot": {
                 "test": "whatever"
-            }, parent));
+            }
+        };
+        test.ok(!selector.matches(parent.notRoot, parent));
 
-            parent = [{
-                "test": "whatever"
-            }];
-            test.ok(!selector.matches(parent[0], parent));
-
-            parent = {
-                "notRoot": {
-                    "test": "whatever"
-                }
-            };
-            test.ok(!selector.matches(parent.notRoot, parent));
-
-            test.done();
-        });
+        test.done();
     },
     "pseudoClassFirstChild": function(test) {
-        var selector = new SimpleSelector(":first-child");
+        var selector = new SimpleSelector(":first-child"),
+            parent = ["i", 42, ["test"]];
 
-        test.doesNotThrow(function() {
-            var parent = ["i", 42, ["test"]];
+        test.ok(selector.matches(parent[0], parent));
+        test.ok(!selector.matches(parent[1], parent));
+        test.ok(!selector.matches(parent[2], parent));
 
-            test.ok(selector.matches(parent[0], parent));
-            test.ok(!selector.matches(parent[1], parent));
-            test.ok(!selector.matches(parent[2], parent));
+        parent = {
+            "i": "am",
+            "a": 42,
+            0: false,
+            1: false,
+            "length": 2,
+            "result": false
+        };
 
-            parent = {
-                "i": "am",
-                "a": 42,
-                0: false,
-                1: false,
-                "length": 2,
-                "result": false
-            };
-
-            test.ok(!selector.matches(parent.i, parent));
-            test.ok(!selector.matches(parent[0], parent));
-            test.ok(!selector.matches(parent[1], parent));
-            test.ok(!selector.matches(parent.result, parent));
-        });
+        test.ok(!selector.matches(parent.i, parent));
+        test.ok(!selector.matches(parent[0], parent));
+        test.ok(!selector.matches(parent[1], parent));
+        test.ok(!selector.matches(parent.result, parent));
 
         test.done();
     },
     "pseudoClassLastChild": function(test) {
-        var selector = new SimpleSelector(":last-child");
+        var selector = new SimpleSelector(":last-child"),
+            parent = ["i", 42, ["test"]];
 
-        test.doesNotThrow(function() {
-            var parent = ["i", 42, ["test"]];
+        test.ok(!selector.matches(parent[0], parent));
+        test.ok(!selector.matches(parent[1], parent));
+        test.ok(selector.matches(parent[2], parent));
 
-            test.ok(!selector.matches(parent[0], parent));
-            test.ok(!selector.matches(parent[1], parent));
-            test.ok(selector.matches(parent[2], parent));
+        parent = {
+            "i": "am",
+            "a": 42,
+            0: false,
+            1: false,
+            "length": 2,
+            "result": false
+        };
 
-            parent = {
-                "i": "am",
-                "a": 42,
-                0: false,
-                1: false,
-                "length": 2,
-                "result": false
-            };
-
-            test.ok(!selector.matches(parent.i, parent));
-            test.ok(!selector.matches(parent[0], parent));
-            test.ok(!selector.matches(parent[1], parent));
-            test.ok(!selector.matches(parent.result, parent));
-        });
+        test.ok(!selector.matches(parent.i, parent));
+        test.ok(!selector.matches(parent[0], parent));
+        test.ok(!selector.matches(parent[1], parent));
+        test.ok(!selector.matches(parent.result, parent));
 
         test.done();
     },
     "pseudoClassOnlyChild": function(test) {
-        var selector = new SimpleSelector(":only-child");
+        var selector = new SimpleSelector(":only-child"),
+            parent = [true];
 
-        test.doesNotThrow(function() {
-            var parent = [true];
+        test.ok(selector.matches(parent[0], parent));
 
-            test.ok(selector.matches(parent[0], parent));
+        parent = [true, false];
+        test.ok(!selector.matches(parent[0], parent));
+        test.ok(!selector.matches(parent[1], parent));
 
-            parent = [true, false];
-            test.ok(!selector.matches(parent[0], parent));
-            test.ok(!selector.matches(parent[1], parent));
+        parent = {
+            "test": true
+        };
+        test.ok(selector.matches(parent.test, parent));
 
-            parent = {
-                "test": true
-            };
-            test.ok(selector.matches(parent.test, parent));
-
-            parent = {
-                "test": true,
-                "another": false
-            };
-            test.ok(!selector.matches(parent.test, parent));
-            test.ok(!selector.matches(parent.another, parent));
-        });
+        parent = {
+            "test": true,
+            "another": false
+        };
+        test.ok(!selector.matches(parent.test, parent));
+        test.ok(!selector.matches(parent.another, parent));
 
         test.done();
     },
     "pseudoClassNthChild": function(test) {
-        test.doesNotThrow(function() {
-            var selector = new SimpleSelector(":nth-child(2)"),
-                parent = ["i", 42, ["test"], "42", true, false, {}, undefined];
+        var selector = new SimpleSelector(":nth-child(2)"),
+            parent = ["i", 42, ["test"], "42", true, false, {}, undefined];
 
-            test.ok(!selector.matches(parent[0], parent));
-            test.ok(selector.matches(parent[1], parent));
-            test.ok(!selector.matches(parent[2], parent));
+        test.ok(!selector.matches(parent[0], parent));
+        test.ok(selector.matches(parent[1], parent));
+        test.ok(!selector.matches(parent[2], parent));
 
-            selector = new SimpleSelector(":nth-child(odd)");
-            test.ok(selector.matches(parent[0], parent));
-            test.ok(!selector.matches(parent[1], parent));
-            test.ok(selector.matches(parent[2], parent));
-            test.ok(!selector.matches(parent[3], parent));
+        selector = new SimpleSelector(":nth-child(odd)");
+        test.ok(selector.matches(parent[0], parent));
+        test.ok(!selector.matches(parent[1], parent));
+        test.ok(selector.matches(parent[2], parent));
+        test.ok(!selector.matches(parent[3], parent));
 
-            selector = new SimpleSelector(":nth-child(even)");
-            test.ok(!selector.matches(parent[0], parent));
-            test.ok(selector.matches(parent[1], parent));
-            test.ok(!selector.matches(parent[2], parent));
-            test.ok(selector.matches(parent[3], parent));
+        selector = new SimpleSelector(":nth-child(even)");
+        test.ok(!selector.matches(parent[0], parent));
+        test.ok(selector.matches(parent[1], parent));
+        test.ok(!selector.matches(parent[2], parent));
+        test.ok(selector.matches(parent[3], parent));
 
-            selector = new SimpleSelector(":nth-child(3n)");
-            test.ok(!selector.matches(parent[0], parent));
-            test.ok(!selector.matches(parent[1], parent));
-            test.ok(selector.matches(parent[2], parent));
-            test.ok(!selector.matches(parent[3], parent));
-            test.ok(!selector.matches(parent[4], parent));
-            test.ok(selector.matches(parent[5], parent));
-            test.ok(!selector.matches(parent[6], parent));
+        selector = new SimpleSelector(":nth-child(3n)");
+        test.ok(!selector.matches(parent[0], parent));
+        test.ok(!selector.matches(parent[1], parent));
+        test.ok(selector.matches(parent[2], parent));
+        test.ok(!selector.matches(parent[3], parent));
+        test.ok(!selector.matches(parent[4], parent));
+        test.ok(selector.matches(parent[5], parent));
+        test.ok(!selector.matches(parent[6], parent));
 
-            selector = new SimpleSelector(":nth-child(3n+1)");
-            test.ok(selector.matches(parent[0], parent));
-            test.ok(!selector.matches(parent[1], parent));
-            test.ok(!selector.matches(parent[2], parent));
-            test.ok(selector.matches(parent[3], parent));
-            test.ok(!selector.matches(parent[4], parent));
-            test.ok(!selector.matches(parent[5], parent));
-            test.ok(selector.matches(parent[6], parent));
+        selector = new SimpleSelector(":nth-child(3n+1)");
+        test.ok(selector.matches(parent[0], parent));
+        test.ok(!selector.matches(parent[1], parent));
+        test.ok(!selector.matches(parent[2], parent));
+        test.ok(selector.matches(parent[3], parent));
+        test.ok(!selector.matches(parent[4], parent));
+        test.ok(!selector.matches(parent[5], parent));
+        test.ok(selector.matches(parent[6], parent));
 
-            selector = new SimpleSelector(":nth-child(3n-1)");
-            test.ok(!selector.matches(parent[0], parent));
-            test.ok(selector.matches(parent[1], parent));
-            test.ok(!selector.matches(parent[2], parent));
-            test.ok(!selector.matches(parent[3], parent));
-            test.ok(selector.matches(parent[4], parent));
-            test.ok(!selector.matches(parent[5], parent));
-            test.ok(!selector.matches(parent[6], parent));
-        });
+        selector = new SimpleSelector(":nth-child(3n-1)");
+        test.ok(!selector.matches(parent[0], parent));
+        test.ok(selector.matches(parent[1], parent));
+        test.ok(!selector.matches(parent[2], parent));
+        test.ok(!selector.matches(parent[3], parent));
+        test.ok(selector.matches(parent[4], parent));
+        test.ok(!selector.matches(parent[5], parent));
+        test.ok(!selector.matches(parent[6], parent));
 
         test.throws(function() {
             var selector = new SimpleSelector(":nth-child(even)"),
@@ -228,51 +214,45 @@ exports.simpleSelector = {
         test.done();
     },
     "pseudoClassNthLastChild": function(test) {
-        var selector = new SimpleSelector(":only-child");
+        var selector = new SimpleSelector(":only-child"),
+            parent = [true];
 
-        test.doesNotThrow(function() {
-            var parent = [true];
+        test.ok(selector.matches(parent[0], parent));
 
-            test.ok(selector.matches(parent[0], parent));
+        parent = [true, false];
+        test.ok(!selector.matches(parent[0], parent));
+        test.ok(!selector.matches(parent[1], parent));
 
-            parent = [true, false];
-            test.ok(!selector.matches(parent[0], parent));
-            test.ok(!selector.matches(parent[1], parent));
+        parent = {
+            "test": true
+        };
+        test.ok(selector.matches(parent.test, parent));
 
-            parent = {
-                "test": true
-            };
-            test.ok(selector.matches(parent.test, parent));
-
-            parent = {
-                "test": true,
-                "another": false
-            };
-            test.ok(!selector.matches(parent.test, parent));
-            test.ok(!selector.matches(parent.another, parent));
-        });
+        parent = {
+            "test": true,
+            "another": false
+        };
+        test.ok(!selector.matches(parent.test, parent));
+        test.ok(!selector.matches(parent.another, parent));
 
         test.done();
     },
     "pseudoClassEmpty": function(test) {
-        var selector = new SimpleSelector(":empty");
+        var selector = new SimpleSelector(":empty"),
+            ele = [];
 
-        test.doesNotThrow(function() {
-            var ele = [];
+        test.ok(selector.matches(ele));
 
-            test.ok(selector.matches(ele));
+        ele = {};
+        test.ok(selector.matches(ele));
 
-            ele = {};
-            test.ok(selector.matches(ele));
+        ele = [true];
+        test.ok(!selector.matches(ele));
 
-            ele = [true];
-            test.ok(!selector.matches(ele));
-
-            ele = {
-                "test": {}
-            };
-            test.ok(!selector.matches(ele));
-        });
+        ele = {
+            "test": {}
+        };
+        test.ok(!selector.matches(ele));
 
         test.done();
     }
