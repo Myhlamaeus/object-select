@@ -33,5 +33,14 @@ exports.simpleSelector = {
         }));
 
         test.done();
+    },
+    "keySelectorEscaping": function(test) {
+        var selector = new CompoundSelector("string.\"t est\"");
+
+        test.deepEqual(selector.find({
+            "t est": "test"
+        }), ["test"]);
+
+        test.done();
     }
 };

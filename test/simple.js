@@ -53,6 +53,15 @@ var typeTests = {
     };
 
 exports.simpleSelector = {
+    "keySelectorEscaping": function(test) {
+        var selector = new SimpleSelector(".\"t est\"");
+
+        test.deepEqual(selector.find({
+            "t est": 123
+        }), [123]);
+
+        test.done();
+    },
     "circular": function(test) {
         var selector = new SimpleSelector(".a"),
             a = {};
