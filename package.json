@@ -1,6 +1,6 @@
 {
   "name": "object-select",
-  "version": "0.0.3-alpha",
+  "version": "0.0.4",
   "main": "lib/object-select.js",
   "description": "A selector engine for JavaScript Objects.",
   "homepage": "https://github.com/ileri/object-select",
