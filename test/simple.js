@@ -53,6 +53,26 @@ var typeTests = {
     };
 
 exports.simpleSelector = {
+    "circular": function(test) {
+        var selector = new SimpleSelector(".a"),
+            a = {};
+
+        a.a = a;
+
+        test.throws(function() {
+            selector.matches(a);
+        }, Error, "SimpleSelector.prototype.matches cannot be used on cyclic objects");
+
+        test.throws(function() {
+            selector.find(a);
+        }, Error, "SimpleSelector.prototype.find cannot be used on cyclic objects");
+
+        test.throws(function() {
+            selector.findFirst(a);
+        }, Error, "SimpleSelector.prototype.findFirst cannot be used on cyclic objects");
+
+        test.done();
+    },
     "pseudoClassRoot": function(test) {
         var selector = new SimpleSelector(":root"),
             parent = false;
