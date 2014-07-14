@@ -32,7 +32,7 @@ var typeTests = {
         "boolean": true,
         "undefined": undefined
     },
-    types = Object.getOwnPropertyNames(typeTests),
+    types = Object.keys(typeTests),
     typeTestFactory = function(type, onlyIfSameType) {
         if(onlyIfSameType === undefined) {
             onlyIfSameType = true;
