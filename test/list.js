@@ -6,7 +6,7 @@ exports.selectorList = {
     "test": function(test) {
         var selector;
 
-        selector = new SelectorList("#example :nth-child(odd), #test"); // create selector
+        selector = new SelectorList(".example :nth-child(odd), .test"); // create selector
         test.deepEqual(selector.find({
             "example": ["this is the first child", "some other child", "this is the last child"],
             "test": "whatever"
