@@ -5,17 +5,21 @@
   "description": "A selector engine for JavaScript Objects.",
   "homepage": "https://github.com/ileri/object-select",
   "bugs": "https://github.com/ileri/object-select/issues",
-  "author": [{
-    "name": "Malte-Maurice Dreyer",
-    "email": "dreyer.maltem@gmail.com"
-  }],
-  "contributors": [{
-    "name": "Malte Dreyer",
-    "email": "dreyer.maltem@gmail.com",
-    "url": "https://github.com/ileri",
-    "contributions": 21,
-    "hireable": false
-  }],
+  "author": [
+    {
+      "name": "Malte-Maurice Dreyer",
+      "email": "dreyer.maltem@gmail.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Malte Dreyer",
+      "email": "dreyer.maltem@gmail.com",
+      "url": "https://github.com/ileri",
+      "contributions": 21,
+      "hireable": false
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ileri/object-select"
@@ -33,7 +37,9 @@
     "select",
     "selector"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "harmony-collections": "^0.3.8"
+  },
   "devDependencies": {
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "^0.3.3",
