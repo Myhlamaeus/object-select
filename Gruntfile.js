@@ -9,7 +9,9 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         "project": {
-            "lib": "lib"
+            "lib": "lib",
+            "tmp": ".tmp",
+            "dist": "dist"
         },
         "nodeunit": {
             "simple": ["test/simple.js"],
@@ -47,9 +49,30 @@ module.exports = function (grunt) {
                 "files": "<%= jshint.test.src %>",
                 "tasks": ["jshint:test", "nodeunit"]
             }
+        },
+        "browserify": {
+            "main": {
+                "src": ["<%= project.lib %>/object-select.js"],
+                "dest": "<%= project.dist %>/browser.js",
+                "options": {
+                    "bundleOptions": {
+                        "standalone": "browser"
+                    }
+                }
+            }
+        },
+        "uglify": {
+            "browser": {
+                "src": ["<%= project.dist %>/browser.js"],
+                "dest": "<%= project.dist %>/browser.min.js"
+            }
+        },
+        "clean": {
+            "tmp": ["<%= project.tmp %>"]
         }
     });
 
     // Default task.
     grunt.registerTask("default", ["jshint", "nodeunit"]);
+    grunt.registerTask("browser", ["browserify", "uglify:browser"]);
 };

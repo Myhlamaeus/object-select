@@ -18,8 +18,8 @@ console.log(selector.find({
 ```
 
 ```sh
-# creates a browser.js
-$ grunt browserify
+# creates a browser.js and a browser.min.js in dist
+$ grunt browser
 ```
 Requires Map
 
