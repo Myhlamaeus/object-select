@@ -21,7 +21,6 @@ console.log(selector.find({
 # creates a browser.js and a browser.min.js in dist
 $ grunt browser
 ```
-Requires Map
 
 
 
