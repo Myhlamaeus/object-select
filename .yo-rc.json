@@ -1,3 +1,9 @@
 {
-  "generator-node": {}
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Myhlamaeus",
+      "authorEmail": "dreyer.maltem+dev@gmail.com",
+      "authorUrl": "https://github.com/Myhlamaeus"
+    }
+  }
 }

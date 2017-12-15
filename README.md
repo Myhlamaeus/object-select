@@ -1,46 +1,38 @@
-# object-select [![Build Status](https://secure.travis-ci.org/ileri/object-select.png?branch=master)](http://travis-ci.org/ileri/object-select)
+# object-select [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 
 > A selector engine for JavaScript Objects.
 
-
-## Getting Started
-
-Install the module with: `npm install object-select --save`
-Note: this requires the --harmony_collections flag
-
-```js
-var objectSelect = require('./lib/object-select'),
-    selector = new objectSelect.ComplexSelector(".example :matches(:first-child, :last-child)"); // create selector
-
-console.log(selector.find({
-    "example": ["this is the first child", "some other child", "this is the last child"]
-})); // ["this is the first child", "this is the last child"]);
-```
+## Installation
 
 ```sh
-# creates a browser.js
-$ grunt browserify
+$ npm install --save object-select
 ```
-Requires Map
 
+## Usage
 
+```js
+import objectSelect from "object-select";
+const objectSelect = require("object-select");
 
-## Documentation
+const selector = objectSelect(".test :matches(.test2, .test3)");
 
-_(Coming soon)_
-
-
-## Examples
-
-_(Coming soon)_
-
-
-## Contributing
-
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com).
-
+selector.find({
+  test: {
+    test2: ["abc"],
+    test3: ["def"]
+  }
+}); // [['abc'], ['def']]
+```
 
 ## License
 
-Copyright (c) 2014 Malte-Maurice Dreyer  
-Licensed under the MIT license.
+MIT © [Myhlamaeus](https://github.com/Myhlamaeus)
+
+[npm-image]: https://badge.fury.io/js/object-select.svg
+[npm-url]: https://npmjs.org/package/object-select
+[travis-image]: https://travis-ci.org/Myhlamaeus/object-select.svg?branch=master
+[travis-url]: https://travis-ci.org/Myhlamaeus/object-select
+[daviddm-image]: https://david-dm.org/Myhlamaeus/object-select.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/Myhlamaeus/object-select
+[coveralls-image]: https://coveralls.io/repos/Myhlamaeus/object-select/badge.svg
+[coveralls-url]: https://coveralls.io/r/Myhlamaeus/object-select
